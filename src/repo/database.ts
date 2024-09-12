@@ -1,4 +1,5 @@
 import { DataSource } from "typeorm";
+import { TestClass } from "../entities/test";
 import * as dotenv from "dotenv";
 
 dotenv.config();
@@ -12,7 +13,7 @@ const AppDataSource = new DataSource({
     database: process.env.DB_NAME,
     synchronize: true, 
     logging: true,
-    entities: [],
+    entities: [TestClass],
     subscribers: [],
     migrations: [],
 });

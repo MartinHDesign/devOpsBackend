@@ -24,6 +24,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const test_1 = require("../entities/test");
 const dotenv = __importStar(require("dotenv"));
 dotenv.config();
 const AppDataSource = new typeorm_1.DataSource({
@@ -35,7 +36,7 @@ const AppDataSource = new typeorm_1.DataSource({
     database: process.env.DB_NAME,
     synchronize: true,
     logging: true,
-    entities: [],
+    entities: [test_1.TestClass],
     subscribers: [],
     migrations: [],
 });
