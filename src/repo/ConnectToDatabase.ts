@@ -1,8 +1,10 @@
 import { DataSource } from "typeorm";
-import { TestClass } from "../entities/test";
 import * as dotenv from "dotenv";
+import { Player } from "../entities/Player";
+import { Teams } from "../entities/Teams";
 
 dotenv.config();
+
 
 const AppDataSource = new DataSource({
     type: "postgres",
@@ -13,7 +15,7 @@ const AppDataSource = new DataSource({
     database: process.env.DB_NAME,
     synchronize: true, 
     logging: true,
-    entities: [TestClass],
+    entities: [Teams,Player],
     subscribers: [],
     migrations: [],
 });
