@@ -1,4 +1,4 @@
-import "reflect-metadata"; // Required by TypeORM
+import "reflect-metadata";
 import AppDataSource from "./repo/ConnectToDatabase";
 import { seedDatabase } from "./repo/SeedDatabaseWithHockeyTeamsAndPlayers";
 import express from 'express';
@@ -13,8 +13,6 @@ server.use("/", teamRoutes);
 
 const seedDB = false;
 if(seedDB){ 
-        console.log("här");
-        
         seedDatabase();
     }
 
