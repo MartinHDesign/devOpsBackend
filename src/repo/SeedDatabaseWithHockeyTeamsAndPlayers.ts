@@ -22,6 +22,7 @@ export async function seedHockeyTeam(teamName:string, logoUrl:string, listOfPlay
 }
 
 export async function seedDatabase() {
+    
     try {
         await AppDataSource.initialize();
         
