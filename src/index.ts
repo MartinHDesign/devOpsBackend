@@ -11,8 +11,8 @@ server.use(express.json());
 
 server.use("/", teamRoutes);
 
-const seedDB = false
-    if(seedDB){ 
+const seedDB = false;
+if(seedDB){ 
         console.log("här");
         
         seedDatabase();

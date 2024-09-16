@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { getAllTeams, getPlayersByTeamId } from '../services/teamService';
+import { isValidUUID} from '../utils/validate'
 
 export const getTeams = async (req: Request, res: Response) => {
     try {
@@ -12,7 +13,13 @@ export const getTeams = async (req: Request, res: Response) => {
 };
 
 export const getPlayers = async (req: Request, res: Response) => {
+
     const teamId = req.params.teamId; 
+
+    if (!isValidUUID(teamId)) {
+        return res.status(400).send('Invalid UUID format');
+      }
+
     try {
         const players = await getPlayersByTeamId(teamId);
         res.json(players);
