@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { getAllTeams, getPlayersByTeamId } from '../services/teamService';
 import { isValidUUID} from '../utils/validate'
 
-export const getTeams = async (req: Request, res: Response) => {
+export const getTeams = async (_: Request, res: Response) => {
     try {
         const teams = await getAllTeams();
         res.json(teams);
