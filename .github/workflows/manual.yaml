@@ -9,12 +9,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
           node-version: "20.14.0"
 
@@ -30,18 +33,10 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - name: Create .env file
-        run: |
-          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
-          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
-          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
-
       - name: Create Release
         id: create_release
         run: |
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-          gh release create "v1.0.0" dist/**/* --title "Release v1.0.0" --notes "Automated release"
+          gh release create "v1.0.0" dist/*.js --title "Release v1.0.0" --notes "Automated release"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
