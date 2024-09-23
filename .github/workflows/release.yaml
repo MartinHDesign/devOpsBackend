@@ -1,34 +1,62 @@
+name: Node.js CI with TypeScript
+
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
+
+  pull_request:
+    branches: ["main"]
+
+env:
+  build-number: ${GITHUB_RUN_NUMBER}
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "20.14.0"
+          node-version: "20"
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build the project
+      - name: Build project
         run: npm run build
+        env:
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_PORT: ${{ secrets.DB_PORT }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_NAME: ${{ secrets.DB_NAME }}
 
-      - name: Create Release Artifact
-        uses: actions/upload-artifact@v4
+      - name: run tests
+        run: npm run test
+
+      - name: Package app
+        run: |
+          mkdir outCode
+          cp -R dist/* outCode/
+
+          # Copy specific files from the root
+          cp package.json outCode/
+          cp jest.config.js outCode/
+          cp package-lock.json outCode/
+          cp tsconfig.json outCode/
+
+      - name: Create Release
+        uses: marvinpinto/action-automatic-releases@latest
         with:
-          name: release-artifact
-          path: |
-            dist/**
-            tsconfig.json
-            package.json
-            jest.config.js
-            package-lock.json
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: false
+          title: "Release ${{ env.build-number }}"
+          files: |
+            outCode/**
