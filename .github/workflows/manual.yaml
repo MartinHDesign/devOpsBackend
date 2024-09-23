@@ -39,6 +39,7 @@ jobs:
       - name: Create Release
         id: create_release
         run: |
+          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           gh release create "v1.0.0" dist/*.js .env .gitignore --title "Release v1.0.0" --notes "Automated release"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
