@@ -8,6 +8,8 @@ RUN npm install
 
 COPY . .
 
+RUN npm run build
+
 ENV port=3000
 
 EXPOSE ${port}
