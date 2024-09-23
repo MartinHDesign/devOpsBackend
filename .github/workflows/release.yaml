@@ -43,7 +43,7 @@ jobs:
       - name: Package app
         run: |
           mkdir outCode
-          cp -R dist/* outCode/
+          cp -R dist/. outCode/
 
           # Copy specific files from the root
           cp package.json outCode/
