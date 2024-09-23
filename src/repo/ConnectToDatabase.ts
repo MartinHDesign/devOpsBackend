@@ -14,6 +14,9 @@ const AppDataSource = new DataSource({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     synchronize: true, 
+    ssl: {
+        rejectUnauthorized: false,
+    },
     logging: true,
     entities: [Teams,Player],
     subscribers: [],

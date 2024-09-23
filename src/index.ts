@@ -18,14 +18,16 @@ server.use(express.json());
 
 server.use("/", teamRoutes);
 
-const seedDB = false;
-if(seedDB){ 
-        seedDatabase();
-    }
+
 
 AppDataSource.initialize()
     .then(() => {
         console.log("Data Source has been initialized!");
+
+        const seedDB = false;
+            if(seedDB){ 
+                seedDatabase();
+            }
 
         server.listen(port, () => {
             console.log("server is running");

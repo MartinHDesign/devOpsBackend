@@ -4,7 +4,7 @@ import { Teams } from "./Teams";
 @Entity()
 export class Player{
     @PrimaryGeneratedColumn("uuid")
-    id?:number;
+    id?:string;
 
     @Column()
     number!:number;

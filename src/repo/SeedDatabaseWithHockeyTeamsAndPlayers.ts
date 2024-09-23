@@ -23,9 +23,7 @@ export async function seedHockeyTeam(teamName:string, logoUrl:string, listOfPlay
 
 export async function seedDatabase() {
     
-    try {
-        await AppDataSource.initialize();
-        
+    try {       
 
         const brynasPlayer: Player[] = [
             {
@@ -230,7 +228,5 @@ export async function seedDatabase() {
 
     } catch (error) {
         console.error("Error seeding database:", error);
-    } finally {
-        await AppDataSource.destroy();
     }
 }
