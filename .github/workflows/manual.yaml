@@ -30,11 +30,15 @@ jobs:
       - name: Build the project
         run: npm run build
 
+      - name: List dist folder
+        run: ls -la dist
+
       - name: Run tests
         run: npm test
 
       - name: Create Release
         id: create_release
+        if: success() && steps.build.outcome == 'success'
         run: |
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           gh release create "v1.0.0" dist/*.js --title "Release v1.0.0" --notes "Automated release"
