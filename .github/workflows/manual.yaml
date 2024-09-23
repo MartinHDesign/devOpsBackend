@@ -11,6 +11,12 @@ jobs:
 
     permissions:
       contents: write
+      discussions: write
+      issues: write
+      pull-requests: write
+      packages: write
+      statuses: write
+      releases: write
 
     steps:
       - name: Checkout code
@@ -26,6 +32,9 @@ jobs:
 
       - name: Clean dist folder
         run: rm -rf dist/*
+
+      - name: List dist folder
+        run: ls -la dist
 
       - name: Build the project
         run: npm run build
