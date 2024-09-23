@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "ts-node src/index.ts"
+    "startDev": "ts-node src/index.ts",
+    "startProd": "node dist/src/index.js",
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",

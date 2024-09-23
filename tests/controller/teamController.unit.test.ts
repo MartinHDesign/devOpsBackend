@@ -55,10 +55,14 @@ describe('team controller integration tests', () => {
         (isValidUUID as jest.Mock).mockReturnValue(true);
         (getPlayersByTeamId as jest.Mock).mockRejectedValue(new Error ("Server Error"));
 
+        const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+
         const response = await request(server).get(`/teams/players/${teamId}`);
 
         expect(response.status).toBe(500);
         expect(response.text).toBe("Internal Server Error");
+
+        consoleErrorSpy.mockRestore();
     });
 });
 
