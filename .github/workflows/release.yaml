@@ -1,5 +1,3 @@
-name: Release
-
 on:
   push:
     branches:
@@ -27,25 +25,10 @@ jobs:
       - name: Create Release Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: dist
-          path: dist/**
-
-  release:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ github.sha }}
-          files: dist/**/*.js
-          name: Release ${{ github.sha }}
-          body: "Automated release"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: release-artifact
+          path: |
+            dist/**
+            tsconfig.json
+            package.json
+            jest.config.js
+            package-lock.json
