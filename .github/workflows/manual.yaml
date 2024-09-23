@@ -27,6 +27,9 @@ jobs:
       - name: Build the project
         run: npm run build
 
+      - name: List dist directory
+        run: ls -la dist
+
       - name: Run tests
         run: npm test
 
