@@ -9,6 +9,9 @@ env:
 
 permissions:
   contents: write
+  issues: read
+  pull-requests: read
+  deployments: read
 
 jobs:
   build:
