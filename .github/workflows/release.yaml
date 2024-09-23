@@ -40,11 +40,14 @@ jobs:
         with:
           name: dist
 
+      - name: List Dist Contents
+        run: ls -la dist
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.sha }}
-          release_name: "Release ${{ github.sha }}"
+          name: "Release ${{ github.sha }}"
           files: dist/**
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
