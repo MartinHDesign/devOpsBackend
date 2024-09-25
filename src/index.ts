@@ -36,6 +36,7 @@ AppDataSource.initialize()
             console.log("server is running");
             console.log("Martin pushar denna uppdatering 09-25 kl 14:23")
             console.log("Martin pushar denna uppdatering 09-25 kl 15:10")
+            console.log("Martin pushar denna uppdatering 09-25 kl 18:24")
             
         })
         
