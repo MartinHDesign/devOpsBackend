@@ -23,4 +23,4 @@ ENV port=3000
 
 EXPOSE ${port}
 
-CMD [ "npm", "run", "startProd" ]
+CMD [ "node", "dist/src/index.js" ]
