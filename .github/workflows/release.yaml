@@ -1,17 +1,8 @@
-name: Node.js CI with TypeScript
+name: Node CI Docker image
 
 on:
   push:
     branches: ["main"]
-
-env:
-  build-number: ${{GITHUB.RUN_NUMBER}}
-
-permissions:
-  contents: write
-  issues: read
-  pull-requests: read
-  deployments: read
 
 jobs:
   build:
@@ -20,41 +11,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - uses: mr-smithers-excellent/docker-build-push@v6
+        name: Build & push Docker image
         with:
-          node-version: "20"
+          image: stefanholmberg/test0924
+          tags: latest
+          registry: docker.io
+          dockerfile: Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build project
-        run: npm run build
-        env:
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_PORT: ${{ secrets.DB_PORT }}
-          DB_USERNAME: ${{ secrets.DB_USERNAME }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-
-      - name: run tests
-        run: npm run test
-
-      - name: Package app
-        run: |
-          mkdir outCode
-          cp -R dist/. outCode/
-          cp package.json outCode/
-          cp jest.config.js outCode/
-          cp package-lock.json outCode/
-          cp tsconfig.json outCode/
-
-      - name: Create Release
-        uses: marvinpinto/action-automatic-releases@latest
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: false
-          title: "Release ${{ env.build-number }}"
-          files: |
-            outCode/**
+      # - name: Deploy to production
+      #   uses: johnbeynon/render-deploy-action@v0.0.8
+      #   with:
+      #     # https://api.render.com/deploy/srv-crp71ku8ii6s73cd0gj0?key=i0sE4jP_63s
+      #     service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
+      #     api-key: ${{ secrets.MY_RENDER_API_KEY }}
+      #     wait-for-success: false

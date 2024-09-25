@@ -3,3 +3,11 @@ node_modules
 .env
 
 Dockerfile
+
+tests
+
+jest.config.js
+
+.git
+
+.gitignore
