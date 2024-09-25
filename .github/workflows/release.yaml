@@ -11,6 +11,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: run tests
+        run: npm run test
+
       - uses: mr-smithers-excellent/docker-build-push@v6
         name: Build & push Docker image
         with:
