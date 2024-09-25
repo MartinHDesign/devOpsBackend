@@ -39,11 +39,11 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: maharnackademin/devopsbackend:test
+          tags: maharnackademin/devopsbackend:latest
 
       - name: Deploy to production
         run: |
-          curl -X POST ${{ secrets.RENDER_HOOK }}
+          curl -X POST ${{ secrets.RENDER_HOOK_LATEST }}
 
       - name: Logout from Docker Hub
         run: docker logout
