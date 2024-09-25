@@ -14,7 +14,7 @@ FROM node:20-slim
 
 WORKDIR /app
 
-COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/dist ./dist/src
 COPY --from=builder /app/package*.json ./
 
 RUN npm install --only=production
