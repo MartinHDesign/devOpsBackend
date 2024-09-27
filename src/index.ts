@@ -30,13 +30,12 @@ AppDataSource.initialize()
         
         if(!databaseHaveTeams){ 
             seedDatabase();
-        } 
+        } else {
+            console.log("Database data found")
+        }
 
         server.listen(port, () => {
             console.log("server is running");
-            console.log("Martin pushar denna uppdatering 09-26 kl 08:23")
-          
-            
         })
         
     })
