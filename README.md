@@ -26,11 +26,14 @@ REQUIREMENTS
 - Docker account
 - Render.com account
 - Node.js (Download from official Node.js webpage)
+- Postgress database in cloud (Render.com can provide one)
 
 INSTALLATION
 To run the entire project
 
 - 1.0 Clone repository
+
+- 1.1 Setup an online Postgress database
 
 - 1.2 Build image: docker build -t <docker-username>/<application-name> .
 
