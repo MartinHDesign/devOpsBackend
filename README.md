@@ -8,8 +8,8 @@ DESCRIPTION
 
 FEATURES
 
-- Fetch teams with: https://<hostpage>/teams
-- Fetch players from a speficifik team: https://<hostpage>/players/{teamId}
+- Fetch teams with: https://hostpage/teams
+- Fetch players from a speficifik team: https://hostpage/players/{teamId}
 
 TECH STACK
 
@@ -35,9 +35,9 @@ To run the entire project
 
 - 1.1 Setup an online Postgress database
 
-- 1.2 Build image: docker build -t <docker-username>/<application-name> .
+- 1.2 Build image: docker build -t docker-username/application-name .
 
-  - 1.2.1 Push image: docker push <docker-username>/<application-name>
+  - 1.2.1 Push image: docker push docker-username/application-name
 
 - 1.3 Create new Web service from existing image(The image you pushed to hub.docker) on Render.com
 
